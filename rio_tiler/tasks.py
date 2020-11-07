@@ -68,7 +68,7 @@ def multi_arrays(
     """Multi array."""
     tasks = create_tasks(reader, assets, threads, *args, **kwargs)
     return ImageData.create_from_list(
-        [data for data, _ in filter_tasks(tasks, allowed_exceptions=allowed_exceptions)]
+        [ImageData(*data) for data, _ in filter_tasks(tasks, allowed_exceptions=allowed_exceptions)]
     )
 
 
