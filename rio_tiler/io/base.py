@@ -206,6 +206,8 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
             assets = (assets,)
 
         def _reader(asset: str, **kwargs: Any) -> Dict:
+            if 'tms' in self.reader_options:
+                self.reader_options.pop('tms')
             url = self._get_asset_url(asset)
             with self.reader(url, tms=self.tms, **self.reader_options) as cog:  # type: ignore
                 return cog.info()
@@ -227,6 +229,8 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
             assets = (assets,)
 
         def _reader(asset: str, *args, **kwargs) -> Dict:
+            if 'tms' in self.reader_options:
+                self.reader_options.pop('tms')
             url = self._get_asset_url(asset)
             with self.reader(url, tms=self.tms, **self.reader_options) as cog:  # type: ignore
                 return cog.stats(*args, **kwargs)
@@ -248,6 +252,8 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
             assets = (assets,)
 
         def _reader(asset: str, *args, **kwargs) -> Dict:
+            if 'tms' in self.reader_options:
+                self.reader_options.pop('tms')
             url = self._get_asset_url(asset)
             with self.reader(url, tms=self.tms, **self.reader_options) as cog:  # type: ignore
                 return cog.metadata(*args, **kwargs)
@@ -345,6 +351,8 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
             )
 
         def _reader(asset: str, *args: Any, **kwargs: Any) -> ImageData:
+            if 'tms' in self.reader_options:
+                self.reader_options.pop('tms')
             url = self._get_asset_url(asset)
             with self.reader(url, tms=self.tms, **self.reader_options) as cog:  # type: ignore
                 return cog.part(*args, **kwargs)
@@ -387,6 +395,8 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
             )
 
         def _reader(asset: str, **kwargs: Any) -> ImageData:
+            if 'tms' in self.reader_options:
+                self.reader_options.pop('tms')
             url = self._get_asset_url(asset)
             with self.reader(url, tms=self.tms, **self.reader_options) as cog:  # type: ignore
                 return cog.preview(**kwargs)
@@ -429,6 +439,8 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
             )
 
         def _reader(asset: str, *args, **kwargs: Any) -> Dict:
+            if 'tms' in self.reader_options:
+                self.reader_options.pop('tms')
             url = self._get_asset_url(asset)
             with self.reader(url, tms=self.tms, **self.reader_options) as cog:  # type: ignore
                 return cog.point(*args, **kwargs)
