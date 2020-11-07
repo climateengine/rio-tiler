@@ -281,6 +281,8 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
                 ExpressionMixingWarning,
             )
 
+        assets = ("web_url",)  #TODO:  DIRTY HACK FOR DEMO - REMOVE
+                  
         if expression:
             assets = self.parse_expression(expression)
 
@@ -291,6 +293,10 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
 
         def _reader(asset: str, *args: Any, **kwargs: Any) -> ImageData:
             url = self._get_asset_url(asset)
+                        
+            if 'tms' in self.reader_options:
+                self.reader_options.pop('tms')
+
             with self.reader(url, tms=self.tms, **self.reader_options) as cog:  # type: ignore
                 return cog.tile(*args, **kwargs)
 
