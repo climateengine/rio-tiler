@@ -432,8 +432,10 @@ def render(
     # WEBP doesn't support 1band dataset so we must hack to create a RGB dataset
     if img_format == "WEBP" and tile.shape[0] == 1:
         tile = numpy.repeat(tile, 3, axis=0)
-    elif img_format == "JPEG":
+    
+    if img_format == "JPEG":
         mask = None
+        tile = tile.astype("uint8")
 
     if img_format == "NPY":
         # If mask is not None we add it as the last band
