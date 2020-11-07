@@ -216,7 +216,7 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
         self,
         pmin: float = 2.0,
         pmax: float = 98.0,
-        assets: Union[Sequence[str], str] = None,
+        assets: Union[Sequence[str], str] = 'web_url',
         **kwargs: Any,
     ) -> Dict[str, Dict[str, ImageStatistics]]:
         """Return array statistics from multiple assets"""
@@ -237,7 +237,7 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
         self,
         pmin: float = 2.0,
         pmax: float = 98.0,
-        assets: Union[Sequence[str], str] = None,
+        assets: Union[Sequence[str], str] = 'web_url',
         **kwargs: Any,
     ) -> Dict[str, Metadata]:
         """Return metadata from multiple assets"""
@@ -259,7 +259,7 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
         tile_x: int,
         tile_y: int,
         tile_z: int,
-        assets: Union[Sequence[str], str] = None,
+        assets: Union[Sequence[str], str] = 'web_url',
         expression: Optional[str] = "",
         asset_expression: Optional[
             str
@@ -319,7 +319,7 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
     def part(
         self,
         bbox: Tuple[float, float, float, float],
-        assets: Union[Sequence[str], str] = None,
+        assets: Union[Sequence[str], str] = 'web_url',
         expression: Optional[str] = "",
         asset_expression: Optional[
             str
@@ -361,7 +361,7 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
 
     def preview(
         self,
-        assets: Union[Sequence[str], str] = None,
+        assets: Union[Sequence[str], str] = 'web_url',
         expression: Optional[str] = "",
         asset_expression: Optional[
             str
@@ -403,7 +403,7 @@ class MultiBaseReader(BaseReader, metaclass=abc.ABCMeta):
         self,
         lon: float,
         lat: float,
-        assets: Union[Sequence[str], str] = None,
+        assets: Union[Sequence[str], str] = 'web_url',
         expression: Optional[str] = "",
         asset_expression: Optional[
             str
