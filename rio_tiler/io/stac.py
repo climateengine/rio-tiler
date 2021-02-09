@@ -1,6 +1,5 @@
 """rio_tiler.io.stac: STAC reader."""
 
-import os
 import functools
 import json
 from typing import Dict, Iterator, Optional, Set, Type
@@ -38,18 +37,7 @@ def fetch(filepath: str) -> Dict:
         return json.loads(aws_get_object(bucket, key))
 
     elif parsed.scheme in ["https", "http", "ftp"]:
-        if os.environ.get('OAUTH_CLIENT_ID', False):
-            # running in CE with IAP
-            from google.auth.transport.requests import Request
-            from google.oauth2 import id_token
-            open_id_connect_token = id_token.fetch_id_token(Request(), os.environ['OAUTH_CLIENT_ID'])
-            headers = {'Authorization': 'Bearer {}'.format(open_id_connect_token)}
-        else:
-            headers = {}
-        r = requests.get(filepath, headers=headers)
-        r.raise_for_status()
-        r = r.json()
-        return r
+        return requests.get(filepath).json()
 
     else:
         with open(filepath, "r") as f:
